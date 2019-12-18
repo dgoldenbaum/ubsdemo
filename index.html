@@ -77,7 +77,7 @@
     <script type="text/javascript">
         var video_obj=null;
         var video_length=0;
-        var video_name='Movie name ' + new Date().getTime();
+        var video_name='Ambassador Video ' + new Date().getTime();
 
 
         // 3. This function creates an <iframe> (and YouTube player)
@@ -87,9 +87,8 @@
             console.log('*** iFrame embed onYouTubeIframeAPIReady');
 
             player = new YT.Player("player1", {
-
+              videoId: '8SbdXFxYt1I?enablejsapi=1',    
               events: {
-
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange
               }
@@ -755,7 +754,7 @@
                                     <iframe id="player1" 
                                             width="560" 
                                             height="315" 
-                                            src="https://www.youtube.com/embed/8SbdXFxYt1I?fs=1&rel=0&enablejsapi=1" 
+                                            src="https://www.youtube.com/embed/\8SbdXFxYt1I?fs=1&rel=0&enablejsapi=1" 
                                             frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 -->
 <h3>Benefits at a glance<br> </h3>
