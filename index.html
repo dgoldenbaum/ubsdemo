@@ -1741,6 +1741,67 @@ function AppMeasurement_Module_Integrate(l) {
         return b
     }
 }
+    
+
+     s.loadModule("Media");
+  
+s.Media.onLoad = function() {
+    console.log('**** MEDIA module loaded');
+    /*Configure Media Module Functions */
+  
+    s.Media.autoTrack= false;
+    s.Media.trackWhilePlaying=false;
+    // s.Media.trackSecond=0; // set to 30 if milestone in seconds
+        console.log('**** MEDIA module loaded1');
+    s.Media.completeByCloseOffset = true; //*** Enabled if you want to allow the video to be completed a few seconds before the actual end of the video
+    s.Media.completeCloseOffsetThreshold = 10; 
+     
+    s.Media.trackVars="events,eVar3,eVar4"; //**NOTE: Add additional data which will be pushed either in the plugin or on the page
+    s.Media.trackEvents="event1,event2,event3,event4,event5,event6"; //**NOTE: Add additional data which will be pushed either in the plugin or on the page
+    s.Media.trackMilestones="25,50,75";
+    s.Media.playerName="My TEst You tube video tracking";
+    s.Media.segmentByMilestones = false;
+    s.Media.trackUsingContextData = true;
+      console.log('**** MEDIA module loaded2');
+    s.Media.contextDataMapping = {
+        "a.media.name":"eVar3",
+        "a.media.segment":"",
+        "a.contentType":"eVar4",
+        "a.media.timePlayed":"event6",
+        "a.media.view":"event1",
+        "a.media.segmentView":"",
+        "a.media.complete":"event5",
+        "a.media.milestones": {
+            25:"event2",
+            50:"event3",
+            75:"event4"
+        }
+    }
+      console.log('**** MEDIA module loaded3');
+    /*
+    * can use the below IF wanna pass additional data --- Need to update s.Media.trackVars --- BUT we could potential set it on above var and avoid using the below
+    */
+    s.Media.monitor =function(s, media){
+  console.log('**** MEDIA module loaded4');
+    console.log(media);
+        //https://marketing.adobe.com/resources/help/en_US/sc/appmeasurement/video/video_mediamonitor.html
+        console.log('in the video monitor, can help add additional evar, prop or events', media);
+        if(media.event == "OPEN") {
+            s.contextData = s.Media.contextDataMapping
+            s.Media.track(media.name);
+        } else if(media.event == "MILESTONE") {
+            s.contextData = s.Media.contextDataMapping
+            s.Media.track(media.name);
+        } else if(media.event == "CLOSE") {
+            s.contextData = s.Media.contextDataMapping
+            s.Media.track(media.name);
+        }
+    }
+  
+  
+}
+    
+
 </script>
     </body>
 </html>
